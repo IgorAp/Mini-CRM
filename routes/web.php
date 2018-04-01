@@ -20,7 +20,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('/companies/store','CompanyController@store');
     Route::get('/companies/{id}/destroy','CompanyController@destroy');
     Route::get('/companies/{id}/edit','CompanyController@edit');
-    Route::get('/companies/{id}/update','CompanyController@update');
+    Route::post('/companies/{id}/update','CompanyController@update');
     Route::get('/companies/{id}/logo','CompanyController@getImageLogo');
 });
 Auth::routes();

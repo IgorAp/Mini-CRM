@@ -22,17 +22,35 @@ class CompanyController extends Controller
             'website'=>$request->website,
             'logo'=>$logo,
         ]);
-        return view ('company.index');
+       return redirect('companies');
     }
     public function edit($id){
-        
+        $company = Company::find($id);
+        return view('company.edit',["company"=>$company]);
     }
-    public function update($id){
-
+    public function update($id,Request $request){
+        if($request->logo == null){
+            Company::find($id)->update([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'website'=>$request->website
+            ]);
+        }
+        else{
+            //$this->validate($request,Company::rules());
+            $logo = $request->image->store('logos');
+            Company::find($id)->update([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'website'=>$request->website,
+                'logo'=>$logo
+            ]);
+        }
+        return redirect('companies');
     }
     public function destroy($id){
         Company::find($id)->delete();
-        return view('company.index');
+        return redirect('companies');
     }
     public function getImageLogo($id){
         $filename = Company::find($id)->logo;
