@@ -8,13 +8,9 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
+                    <h2>Welcome to Mini CRM</h2>
+                    <a class="btn btn-primary"  href="employees">Employees</a>
+                    <a  class="btn btn-primary" href="/companies">Companies</a>
                 </div>
             </div>
         </div>

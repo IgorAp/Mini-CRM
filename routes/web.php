@@ -12,9 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 Route::group(['middleware'=>'auth'],function(){
+    //Company
     Route::get('/companies',"CompanyController@index");
     Route::get('/companies/create',"CompanyController@create");
     Route::post('/companies/store','CompanyController@store');
@@ -22,6 +23,13 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/companies/{id}/edit','CompanyController@edit');
     Route::post('/companies/{id}/update','CompanyController@update');
     Route::get('/companies/{id}/logo','CompanyController@getImageLogo');
+    //Employee
+    Route::get('/employees','EmployeeController@index');
+    Route::get('/employees/select','EmployeeController@select');
+    Route::get('/employees/{id}/create','EmployeeController@create');
+    Route::post('/employees/{id}/store','EmployeeController@store');
+    Route::get('/employees/{id}/destroy','EmployeeController@destroy');
+    Route::get('/employees/{id}/edit','EmployeeController@edit');
+    Route::post('/employees/{id}/update','EmployeeController@update');
 });
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
