@@ -9,7 +9,7 @@
                 <input type="email" class="form-control" name="email" placeholder="Email" value="{{$employee->email}}">
                 <input type="phone" class="form-control" name="phone" placeholder="Phone" value="{{$employee->phone}}">
                 <a class="btn btn-primary" href="/companies">Cancel</a>
-                <input class="btn" type="submit"> 
+                <input class="btn" type="submit" value="update"> 
             </div>
         </form>
     </div>

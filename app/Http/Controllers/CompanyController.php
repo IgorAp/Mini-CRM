@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Company;
+use Illuminate\Support\Facades\Storage;
 class CompanyController extends Controller
 {
     public function index(){
@@ -29,7 +30,7 @@ class CompanyController extends Controller
         return view('company.edit',["company"=>$company]);
     }
     public function update($id,Request $request){
-        if($request->logo == null){
+        if($request->image == null){
             Company::find($id)->update([
                 'name'=>$request->name,
                 'email'=>$request->email,
@@ -37,18 +38,19 @@ class CompanyController extends Controller
             ]);
         }
         else{
-            //$this->validate($request,Company::rules());
+            Storage::delete(Company::find($id)->logo);
             $logo = $request->image->store('logos');
             Company::find($id)->update([
                 'name'=>$request->name,
                 'email'=>$request->email,
                 'website'=>$request->website,
-                'logo'=>$logo
+                'logo'=>$logo,
             ]);
         }
         return redirect('companies');
     }
     public function destroy($id){
+        Storage::delete(Company::find($id)->logo);
         Company::find($id)->delete();
         return redirect('companies');
     }
